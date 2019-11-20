@@ -9,31 +9,12 @@
                 margin: 0;
                 padding: 0;
             }
-            #editor {
-                overflow: hidden;
-                background-color: #728597;
-            }
-            #code {
-                float: left;
-                width: 48vw;
-                height: 90vh;
-                min-height:500px;
-            }
-            .editor-preview {
-                float: right;
-                width: 48vw;
-                height: 90vh;
-                min-height:500px;
-                background-color: #eee;
-                overflow: hidden;
-                overflow-y: auto;
-            }
         </style>
     </head>
-    <body style="padding: 20px 0">
+    <body>
         <div id="editor">
             <!-- Edit -->
-            <div id="code" class="editor is-side" >
+            <div id="code" class="editor is-side" style="height: 100vh; min-height:500px" >
             </div>
 
             <!-- Preview -->
@@ -45,12 +26,9 @@
         <script src="https://cdn.bootcss.com/ace/1.2.6/ext-language_tools.js"></script>
         <script src="https://cdn.bootcss.com/ace/1.2.6/mode-markdown.js"></script>
         <script src="https://cdn.bootcss.com/ace/1.2.6/snippets/markdown.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/10.0.0/markdown-it.js"></script>
         <!-- built files will be auto injected -->
         <script>
             (function(){
-                /* ======================= 初始化 ace ========================= */
                 const ace = window.ace;
                 // 初始化对象
                 let editor = ace.edit('code');
@@ -73,21 +51,6 @@
                 editSession.setValue(window.mdContent);
 
                 editor.focus()
-
-                /* ======================= 初始化 markdown-it ========================= */
-                var md = window.markdownit();
-                const content = editSession.getValue()
-                var result = md.render(content);
-                document.getElementsByClassName('editor-preview')[0].innerHTML = result;
-
-                /* ======================= 绑定事件 markdown-it 渲染 ========================= */
-                editSession.on('change', () => {
-                    const content = editSession.getValue()
-                    lines = editSession.getLength()
-                    words = content.replace(/\s*/g, '').length
-                    var result = md.render(content);
-                    document.getElementsByClassName('editor-preview')[0].innerHTML = result;
-                })
             }())
         </script>
     </body>
