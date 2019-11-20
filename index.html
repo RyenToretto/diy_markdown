@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Markdown</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="editor">
+            <!-- Edit -->
+            <div id="code" class="editor is-side" style="height: 100vh; min-height:500px" >
+            </div>
+
+            <!-- Preview -->
+            <div class="editor-preview">
+            </div>
+        </div>
+        <script src="./config/content.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/ace.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/ext-language_tools.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/mode-markdown.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/snippets/markdown.js"></script>
+        <!-- built files will be auto injected -->
+        <script>
+            (function(){
+                const ace = window.ace;
+                // 初始化对象
+                let editor = ace.edit('code');
+                let editSession = editor.getSession()
+                let selection = editSession.getSelection()
+                let undoManager = editSession.getUndoManager()
+
+                // editor options
+                editor.setTheme('ace/theme/chrome')
+                editor.$blockScrolling = Infinity
+                editor.setShowPrintMargin(false)
+                editor.setShowFoldWidgets(false)
+                console.log(this.editor)
+
+                // editor session options
+                editSession.setMode('ace/mode/markdown')
+                editSession.setUseWrapMode(true)
+
+                // insert content
+                editSession.setValue(window.mdContent);
+
+                editor.focus()
+            }())
+        </script>
+    </body>
+</html>

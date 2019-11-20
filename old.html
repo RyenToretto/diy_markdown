@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Markdown</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="editor">
+            <pre id="code" class="ace_editor" style="height: 100vh; min-height:500px" >
+                <textarea class="ace_text-input">
+# Markdown Editor
+
+> 一个简洁的在线 Markdown 编辑器
+
+这是一段测试文本。
+
+测试一下表格的显示效果：
+
+| 水果        | 价格    | 数量  |
+| --------    | :-----: | :----: |
+| 香蕉        | $1      | 5    |
+| 苹果        | $1      | 6    |
+| 草莓        | $1      | 7    |
+
+## 功能
+
+* 方便的`导入导出`功能
+    *  直接把一个markdown的文本文件拖放到当前这个页面就可以了
+    *  导出为一个html格式的文件，样式一点也不会丢失
+* 编辑和预览`同步滚动`，所见即所得（右上角设置）
+* `VIM快捷键`支持，方便vim党们快速的操作 （右上角设置）
+* 强大的`自定义CSS`功能，方便定制自己的展示
+* 有数量也有质量的`主题`,编辑器和预览区域
+* 完美兼容`Github`的markdown语法
+* 预览区域`代码高亮`
+* 所有选项自动记忆
+
+## 二级标题
+
+这是一段文本 `code`。
+
+### 三级标题
+
+这是内容
+
+### 三级标题
+
+**加粗**文字
+
+```javascript
+let person = {
+    name: 'yunser',
+    age: 18
+}
+```
+
+```css
+.code {
+    color: '#f00'
+    background: '#000'
+}
+```
+
+I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].
+
+这是一个链接到谷歌的[^脚注]。
+
+[^脚注]: http://www.google.com
+
+[1]: http://google.com/        "Google"
+[2]: http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"
+
+            </textarea></pre>
+        </div>
+
+        <script src="./config/content.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/ace.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/ext-language_tools.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/mode-markdown.js"></script>
+        <script src="https://cdn.bootcss.com/ace/1.2.6/snippets/markdown.js"></script>
+        <!-- built files will be auto injected -->
+        <script>
+            (function(){
+                const ace = window.ace;
+                // 初始化对象
+                let editor = ace.edit('code');
+                this.editor = editor;
+
+                // 设置风格和语言（更多风格和语言，请到github上相应目录查看）
+                let theme = 'clouds';
+                let language = 'markdown';
+                editor.setTheme('ace/theme/' + theme);
+                editor.session.setMode('ace/mode/' + language);
+
+                // 字体大小
+                editor.setFontSize(18);
+
+                // 设置只读（true时只读，用于展示代码）
+                editor.setReadOnly(false);
+
+                // 自动换行,设置为off关闭
+                editor.setOption('wrap', 'free');
+                // 启用提示菜单
+                ace.require('ace/ext/language_tools');
+                editor.setOptions({
+                    enableBasicAutocompletion: true,
+                    enableSnippets: true,
+                    enableLiveAutocompletion: true
+                });
+
+                editor.getSession().setUseSoftTabs(true);
+
+                editor.find('标题', {
+                    backwards: false,
+                    wrap: false,
+                    caseSensitive: false,
+                    wholeWord: false,
+                    regExp: false
+                })
+            }())
+        </script>
+    </body>
+</html>
